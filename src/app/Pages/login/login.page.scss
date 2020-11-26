@@ -1,0 +1,40 @@
+.icon {
+    max-width: 20vh;
+    display: block;
+    margin: 0 auto;
+}
+
+ion-input,
+ion-item {
+    --background: transparent;
+    --background-activated: #500808;
+    font-size: 1.25em;
+    letter-spacing: 1px;
+}
+
+ion-content {
+    --background: aliceblue;
+}
+
+.button {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+
+.text-danger {
+    color: #cf3c4f;
+}
+
+.text {
+    color: #2a2a2a;
+}
+
+.colorInterface {
+    --background: #313131;
+}
+
+.colorInterface:hover {
+    --background: #2a2a2a;
+    --background-activated: #500808;
+    --background-hover: #500808;
+}

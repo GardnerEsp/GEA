@@ -1,18 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MapComponent } from './map/map.component';
+import { MenuComponent } from './menu/menu.component';
+import { IonicModule } from '@ionic/angular';
 
 
 
 @NgModule({
   declarations: [
-    MapComponent
+    MapComponent,
+    MenuComponent
   ],
   exports:[
-    MapComponent
+    MapComponent,
+    MenuComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    IonicModule
   ]
 })
 export class ComponentsModule { }

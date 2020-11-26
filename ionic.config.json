@@ -1,5 +1,7 @@
 {
   "name": "bachesProyect",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

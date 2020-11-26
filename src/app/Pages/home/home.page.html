@@ -1,16 +1,22 @@
-<ion-header [translucent]="true">
+<app-menu></app-menu>
+<ion-header no-border [translucent]="true" class="animated fadeInDown">
+
     <ion-toolbar>
+        <ion-button color="none" class="buttonMenu" mode=ios slot="start" (click)="toggleMenu()">
+            <ion-icon slot="icon-only" name="menu">
+            </ion-icon>
+        </ion-button>
+        <!--  <ion-button class="buttonMenu">
+            <ion-menu-button lines='none' slot="icon-only" menu="first">
+            </ion-menu-button>
+        </ion-button>-->
         <ion-title>
-            Blank
+            G E A
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Blank</ion-title>
-        </ion-toolbar>
-    </ion-header>
 
+    <ion-button color="primary" (click)=goLogin()>Login</ion-button>
     <app-map></app-map>
 </ion-content>

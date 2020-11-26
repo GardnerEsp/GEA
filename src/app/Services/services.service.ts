@@ -25,5 +25,7 @@ export class ServicesService {
       zoom: 12,
     });
     this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.resize();
     }
 }
+

@@ -1,0 +1,26 @@
+<ion-header class="">
+    <ion-toolbar class="colorInterfaz ">
+        <ion-title mode=ios class="ion-text-center animated fadeInDown">Ingresar</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" style="text-align: center">
+    <img class="icon ion-padding-top" src="assets/icon/Logo - GEA PNG.png" alt="">
+    <form autocomplete="off" class="ion-padding-top">
+        <ion-item class="ion-padding-top">
+            <ion-label position="stacked" class="text"><b>Email</b> <span class="text-danger">*</span></ion-label>
+            <ion-input class="text" type="text" name="email" required="true"></ion-input>
+        </ion-item>
+        <ion-item class="ion-padding-top">
+            <ion-label position="stacked" class="text"><b> Contraseña</b> <span class="text-danger">*</span></ion-label>
+            <ion-input class="text" type="password" name="password" required="true"></ion-input>
+        </ion-item>
+        <ion-button class="ion-margin-top colorInterface " type="submit" expand="block" (click)="map()">Entrar</ion-button>
+    </form>
+    <div>
+        <span class="text button">¿No tienes cuenta?</span><a routerLink="/register" class="text-danger"> Regístrate<small></small></a>
+    </div>
+
+
+</ion-content>
