@@ -16,7 +16,10 @@
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-
-    <ion-button color="primary" (click)=goLogin()>Login</ion-button>
+    <ion-fab color="danger" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button class="colorInterface">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
     <app-map></app-map>
 </ion-content>

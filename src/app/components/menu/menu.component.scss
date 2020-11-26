@@ -19,3 +19,16 @@ ion-menu {
         --ion-background-color: transparent !important;
     }
 }
+
+.colorInterface {
+    --background: #640505;
+    margin-bottom: 2em;
+    --background-activated: #771111;
+    --background-hover: #6d0c0c;
+}
+
+.colorInterface:hover {
+    --background: #640505;
+    --background-activated: #771111;
+    --background-hover: #6d0c0c;
+}
