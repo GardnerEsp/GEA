@@ -11,13 +11,13 @@
             </ion-menu-button>
         </ion-button>-->
         <ion-title>
-            G E A
+            G E A <i class="fas fa-map-marker-alt"></i>
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
     <ion-fab color="danger" vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button class="colorInterface">
+        <ion-fab-button class="colorInterface" (click)="addReport()">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

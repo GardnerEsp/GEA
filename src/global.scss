@@ -32,6 +32,14 @@
     overflow: hidden;
 }
 
+ion-toolbar {
+    --background: #313131;
+}
+
+ion-content {
+    --background: #a0a0a0;
+}
+
 #map {
     height: 100%;
     width: 100%;
