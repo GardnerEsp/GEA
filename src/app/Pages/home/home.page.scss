@@ -51,3 +51,13 @@ ion-content {
     --background-activated: #771111;
     --background-hover: #6d0c0c;
 }
+
+.avatar {
+    margin-left: 0em;
+    margin-right: .5em;
+    display: flex;
+    margin-top: .5em;
+    margin-bottom: .5em;
+    height: 2.5em;
+    width: 2.5em;
+}

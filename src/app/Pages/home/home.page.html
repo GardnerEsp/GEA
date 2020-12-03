@@ -1,9 +1,10 @@
-<app-menu></app-menu>
 <ion-header no-border [translucent]="true" class="animated fadeInDown">
 
-    <ion-toolbar>
-        <ion-button color="none" class="buttonMenu" mode=ios slot="start" (click)="toggleMenu()">
-            <ion-icon slot="icon-only" name="menu">
+    <ion-toolbar style="text-align: center;">
+
+
+        <ion-button (click)="onLogout()" color="none" class="buttonMenu" mode=ios slot="start">
+            <ion-icon slot="icon-only" name="log-out-outline">
             </ion-icon>
         </ion-button>
         <!--  <ion-button class="buttonMenu">
@@ -11,13 +12,21 @@
             </ion-menu-button>
         </ion-button>-->
         <ion-title>
-            G E A <i class="fas fa-map-marker-alt"></i>
+            G E A
         </ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-    <ion-fab color="danger" vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button class="colorInterface" (click)="addReport()">
+
+    <ion-fab vertical="start" class="animated fadeInDown" horizontal="end" small edge slot="fixed" style="margin-top: -2.8em; height: 1em;">
+        <ion-fab-button color="danger" style="height: 2.3em; width:2.3em ; " (click)="presentAlertPrompt()">
+            <ion-icon style="height: .8em; width:.8em ; " name="settings"></ion-icon>
+        </ion-fab-button>
+
+    </ion-fab>
+
+    <ion-fab color="danger" vertical="bottom" horizontal="center" slot="fixed" class="animated fadeInDown" *ngIf="admi">
+        <ion-fab-button class="colorInterface">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>

@@ -1,18 +1,29 @@
 <ion-menu class="menu_main" side="start" menuId="first" contentId="content1" content-id="menuContent">
     <ion-header>
+
+
         <ion-avatar class="avatar">
             <img src="https://pbs.twimg.com/media/EQ14N_5XsAokYc2.jpg">
         </ion-avatar>
     </ion-header>
     <ion-content style="text-align: center;">
         <h3>Nombre Usuario</h3>
-
-
+        <button>QUE PEDO</button>
         <ion-fab vertical="bottom" horizontal="center" slot="fixed">
             <ion-fab-button class="colorInterface" (click)=goLogin()>
                 <ion-icon name="log-out-outline"></ion-icon>
             </ion-fab-button>
         </ion-fab>
+
+
+        <ion-fab color="danger" vertical="bottom" horizontal="end" slot="fixed">
+            <ion-fab-button class="colorInterface" (click)="goLogin()">
+                <ion-icon name="add"></ion-icon>
+            </ion-fab-button>
+        </ion-fab>
+
+        <ion-fab-button>Default</ion-fab-button>
+
 
 
     </ion-content>
