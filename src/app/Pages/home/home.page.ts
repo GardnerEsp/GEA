@@ -1,14 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuController } from '@ionic/angular';
-import { MapComponent } from '../../components/map/map.component';
-
-import * as mapboxgl from 'mapbox-gl';
-import { LngLatLike } from 'mapbox-gl';
-import { environment } from '@env/environment';
-import { GeoJson, FeatureCollection } from '../../Models/mapJson.model';
-import { ServicesService } from 'src/app/Services/services.service';
-
+import { MenuController, AlertController } from '@ionic/angular';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -17,79 +10,67 @@ import { ServicesService } from 'src/app/Services/services.service';
 })
 export class HomePage implements OnInit {
 
-
-  intervale: any;
-  markers: any;
-
-  mapbox = (mapboxgl as typeof mapboxgl);
-  map: mapboxgl.Map;
-  style = `mapbox://styles/mapbox/streets-v11`;
-  lat = 43.1746;
-  lng = -2.4125;
-  zoom = 15;
-
-
+  admi = false;
   constructor(
     private router: Router,
-    private menu: MenuController,
-    private mapService: ServicesService) { 
+    private menu: MenuController,private auth:AngularFireAuth,
+    public alertController: AlertController) { 
     }
 
   ngOnInit() {
-    
   }
 
   toggleMenu() {
     this.menu.toggle();
   }
-  addReport(){
-    this.router.navigateByUrl('/add-report');
+  toLogin(){
+    this.router.navigateByUrl("/login");
+  }
+  onLogout(){
+    if(this.auth.signOut()){
+      this.router.navigateByUrl("/login");
+      this.admi=false;
+    }else{
+      console.log('no se sale');
+    }
   }
 
-  ionViewDidEnter() {
-    this.buildMap();
-    this.intervale = setTimeout(() => {
-      this.uploadMarkersToMap();
-    }, 1000);
-  }
 
-  buildMap() {
-    this.mapbox.accessToken = environment.mapBoxToken;
-    this.map = new mapboxgl.Map({
-      container: 'map',
-      style: this.style,
-      center: [-109.9459475, 27.5432134],
-      zoom: 12,
+  async presentAlertPrompt() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Modo Avanzado',
+      inputs: [
+        {
+          name: 'Contraseña',
+          type: 'password',
+          placeholder: 'Contraseña'
+        },
+       
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'Ok',
+          handler: (alertData) => {
+            
+            console.log('Confirm Ok');
+            if(alertData="root"){
+              console.log("si entra");
+              this.admi=true;
+            }
+          }
+        }
+      ]
     });
-    this.map.addControl(new mapboxgl.NavigationControl());
-    this.map.resize();
+
+    await alert.present();
   }
-
-  
-
-  private uploadMarkersToMap(): void {
-    this.mapService.getMarkers().forEach((marker, index) => {
-        const markerIcon = this.createMarkerMapIcon(marker);
-        markerIcon.addEventListener('click', () => {
-          this.map.flyTo({
-            zoom: 12.5,
-            center: marker.geometry.coordinates as LngLatLike
-          });
-        });
-        
-        new mapboxgl.Marker(markerIcon)
-          .setLngLat( marker.geometry.coordinates as LngLatLike)
-          .addTo(this.map);
-    });
-  }
-
-  createMarkerMapIcon(marker): HTMLElement {
-    let markerIcon = document.createElement('ion-icon');
-    markerIcon.name = "pin-sharp"
-    markerIcon.style.fontSize = "40px";
-    markerIcon.style.color = marker.properties.color;
-    return markerIcon;
-  }
-
 
 }

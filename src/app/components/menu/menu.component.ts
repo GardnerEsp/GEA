@@ -11,6 +11,7 @@ export class MenuComponent implements OnInit {
   constructor(private router:Router) { }
 
   ngOnInit() {}
+  
   goLogin(){
     this.router.navigateByUrl('/login');
   }

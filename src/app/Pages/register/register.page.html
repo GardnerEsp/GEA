@@ -13,10 +13,7 @@
 
     <img class="icon ion-padding-top" src="assets/icon/Logo - GEA PNG.png" alt="">
     <form autocomplete="off" [formGroup]="registerForm">
-        <ion-item>
-            <ion-label position="stacked" class="text"><b> Usuario</b> <span class="text-danger">*</span></ion-label>
-            <ion-input class="text" type="text" name="email" required="true"></ion-input>
-        </ion-item>
+
         <ion-item>
             <ion-label position="stacked" class="text"><b>Email</b> <span class="text-danger">*</span></ion-label>
             <ion-input class="text" type="text" formControlName="email" name="email" required="true"></ion-input>
@@ -25,7 +22,7 @@
             <ion-label position="stacked" class="text"><b>Contraseña</b> <span class="text-danger">*</span></ion-label>
             <ion-input class="text" type="password" name="password" formControlName="password" required="true"></ion-input>
         </ion-item>
-        <ion-button class="ion-margin-top colorInterface button " type="submit" expand="block" (click)="createUser()">Entrar</ion-button>
+        <ion-button class="ion-margin-top colorInterface button " type="submit" expand="block" (click)="createUser()" (click)="presentAlert()">Entrar</ion-button>
     </form>
     <div class="ion-text-center">
     </div>

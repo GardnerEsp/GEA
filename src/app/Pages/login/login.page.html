@@ -7,16 +7,16 @@
 
 <ion-content class="ion-padding" style="text-align: center">
     <img class="icon ion-padding-top" src="assets/icon/Logo - GEA PNG.png" alt="">
-    <form autocomplete="off" class="ion-padding-top" [formGroup]="registerForm">
+    <form autocomplete="off" class="ion-padding-top form" [formGroup]="loginForm">
         <ion-item class="ion-padding-top">
             <ion-label position="stacked" class="text"><b>Email</b> <span class="text-danger">*</span></ion-label>
-            <ion-input class="text" type="text" name="email" required="true"></ion-input>
+            <ion-input class="text" type="text" name="email" required="true" formControlName="email"></ion-input>
         </ion-item>
         <ion-item class="ion-padding-top">
             <ion-label position="stacked" class="text"><b> Contraseña</b> <span class="text-danger">*</span></ion-label>
-            <ion-input class="text" type="password" name="password" required="true"></ion-input>
+            <ion-input class="text" type="password" name="password" required="true" formControlName="password"></ion-input>
         </ion-item>
-        <ion-button class="ion-margin-top colorInterface " type="submit" expand="block" (click)="map()">Entrar</ion-button>
+        <ion-button class="ion-margin-top colorInterface " type="submit" expand="block" (click)="onLogin()" (click)="presentAlert()">Entrar</ion-button>
     </form>
     <div>
         <span class="text button" style="margin-top: -10em;">¿No tienes cuenta?</span>
