@@ -10,17 +10,17 @@
     <form autocomplete="off" class="ion-padding-top" [formGroup]="registerForm">
         <ion-item class="ion-padding-top">
             <ion-label position="stacked" class="text"><b>Email</b> <span class="text-danger">*</span></ion-label>
-            <ion-input class="text" type="text" name="email" required="true" formControlName="email"></ion-input>
+            <ion-input class="text" type="text" name="email" required="true"></ion-input>
         </ion-item>
         <ion-item class="ion-padding-top">
             <ion-label position="stacked" class="text"><b> Contraseña</b> <span class="text-danger">*</span></ion-label>
-            <ion-input class="text" type="password" name="password" required="true" formControlName="password"></ion-input>
+            <ion-input class="text" type="password" name="password" required="true"></ion-input>
         </ion-item>
         <ion-button class="ion-margin-top colorInterface " type="submit" expand="block" (click)="map()">Entrar</ion-button>
     </form>
     <div>
         <span class="text button" style="margin-top: -10em;">¿No tienes cuenta?</span>
-        <ion-button style="margin-top: -.19em;" size="small" class="text-danger" color="danger" fill="clear" (click)="createUser()" routerLink="/register"><b>Regístrate</b> </ion-button>
+        <ion-button style="margin-top: -.19em;" size="small" class="text-danger" color="danger" fill="clear" routerLink="/register"><b>Regístrate</b> </ion-button>
     </div>
 
 

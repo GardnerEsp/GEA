@@ -1,21 +1,15 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@env/environment';
-import * as mapboxgl from 'mapbox-gl';
-import { MarkerInMap } from 'src/app/Models/marker.model'
 import { Category } from 'src/app/Models/category.model';
-import { GeoJson, FeatureCollection } from '../Models/mapJson.model';
+import { GeoJson } from 'src/app/Models/mapJson.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ServicesService {
+export class MapService {
   markers: GeoJson[];
   categories: Category[];
+  constructor() { }
 
-  constructor() {
-  }
-
-  
   public getCategories(): Category[] {
     this.categories = new Array<Category>();
     this.categories.push({ id: "aaa1", name: "Bache", color: "#E02828", iconName: "close-circle" });
@@ -32,6 +26,4 @@ export class ServicesService {
     this.markers.push(new GeoJson("0000-3333-4444-5555",[-109.9422836, 27.4653752], this.categories[2]));
     return this.markers;
   }
-
 }
-

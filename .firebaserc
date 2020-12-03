@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "g-e-a-f1a8c": {
+      "hosting": {
+        "app": [
+          "g-e-a-f1a8c"
+        ]
+      }
+    }
+  }
+}

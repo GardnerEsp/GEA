@@ -34,7 +34,5 @@ export class LoginPage implements OnInit {
 
     //this.menu.enable(true,"first");
   }
-  createUser(){
-    console.log(this.registerForm.value)
-  }
+ 
 }

@@ -36,8 +36,7 @@ export class HomePage implements OnInit {
     }
 
   ngOnInit() {
-    this.ionViewDidEnter();
-    this.menu.enable(true, "first");
+    
   }
 
   toggleMenu() {

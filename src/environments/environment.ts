@@ -5,6 +5,15 @@
 export const environment = {
   production: false,
   mapBoxToken: 'pk.eyJ1IjoiZ2FyZG5lcmVzcCIsImEiOiJja2h0ejhlNjgwM2c2MnpudGpuYXlteGpxIn0.VK0KTnHncEiwOPI2eFeMUg',
+  firebase: {
+    apiKey: "AIzaSyCymlxiI9Mo6rPyRoWjptyBqvY4tqKA4Ys",
+    authDomain: "g-e-a-f1a8c.firebaseapp.com",
+    projectId: "g-e-a-f1a8c",
+    storageBucket: "g-e-a-f1a8c.appspot.com",
+    messagingSenderId: "1027163181434",
+    appId: "1:1027163181434:web:8f27526b34d42de6f086c3",
+    measurementId: "G-Y9PJ6KFTTY"
+  }
 };
 
 /*
