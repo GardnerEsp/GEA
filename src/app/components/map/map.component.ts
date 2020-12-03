@@ -3,11 +3,6 @@ import { environment } from '@env/environment';
 import * as mapboxgl from 'mapbox-gl';
 import { LngLatLike } from 'mapbox-gl';
 import { MapService } from './services/map.service';
-
-
-import * as mapboxgl from 'mapbox-gl';
-import { LngLatLike } from 'mapbox-gl';
-import { environment } from '@env/environment';
 import { GeoJson, FeatureCollection } from '../../Models/mapJson.model';
 import { ServicesService } from 'src/app/Services/services.service';
 
