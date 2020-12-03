@@ -6,6 +6,7 @@ export interface IGeometry {
 export interface IGeoJson {
     type: string;
     id: string;
+    date: Date;
     geometry: IGeometry;
     properties?: any;
     $key?: string;
@@ -15,13 +16,15 @@ export class GeoJson implements IGeoJson {
   type = 'Feature';
   geometry: IGeometry;
   id: string;
+  date: Date;
 
-  constructor(id, coordinates, public properties?) {
+  constructor(id, date: Date, coordinates, public properties?) {
     this.geometry = {
       type: 'Point',
       coordinates: coordinates
     }
     this.id = id;
+    this.date = date;
   }
 }
 

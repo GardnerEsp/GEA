@@ -1,5 +1,49 @@
-<div id="map-container" class="animated fadeInDown">
-
+<div id="map-container" class="animated fadeInDown container">
     <div id="map"></div>
-
 </div>
+
+<ion-card id="reportInfoContainer" *ngIf="showReportInfo">
+    <ion-card-content>
+        <ion-card-header>
+            <ion-card-title>Reporte de {{currentMarker.properties.name}}</ion-card-title>
+            <ion-card-subtitle>{{actualAddress}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+            <ion-item>
+
+            </ion-item>
+        </ion-item>
+    </ion-card-content>
+    <section>
+        <ion-button expand="block" color="success" (click)="clearReport()">Concluir Reporte
+            <ion-icon name="shield-checkmark"></ion-icon>
+        </ion-button>
+      </section>
+</ion-card>
+
+<ion-card id="addReportContainer" *ngIf="showAddReport">
+    <ion-card-content>
+        <ion-card-header>
+            <ion-card-title>Nuevo Reporte</ion-card-title>
+            <ion-card-subtitle>{{actualAddress}}</ion-card-subtitle>
+        </ion-card-header>
+        <ion-item>
+            <ion-item>
+                <select (change)="addCategory($event.target?.value)">
+                    <option disabled selected>
+                        Categoría
+                    </option>
+                    <option *ngFor="let category of categories;" value="{{category.id}}">
+                        {{category?.name}}
+                    </option>
+                </select>
+            </ion-item>
+        </ion-item>
+    </ion-card-content>
+
+    <ion-item>
+        <ion-button color="medium" (click)="closeReport()">Cancelar</ion-button>
+        <ion-button fill="solid" slot="end" class="colorInterface" (click)="addReport()" [disabled]="disabledButton">
+            Agregar Reporte</ion-button>
+    </ion-item>
+</ion-card>

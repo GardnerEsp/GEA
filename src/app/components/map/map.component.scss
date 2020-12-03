@@ -12,3 +12,68 @@
     width: auto;
     background-color: #313131;
 }
+
+.colorInterface {
+    --background: #640505;
+    --background-activated: #771111;
+    --background-hover: #6d0c0c;
+}
+
+.colorInterface:hover {
+    --background: #640505;
+    --background-activated: #771111;
+    --background-hover: #6d0c0c;
+}
+
+#addReportContainer{
+    max-height: 80%;
+    width: 20%;
+    left: 2%;
+    top: 10%;
+    z-index: 2;
+    overflow-y: auto;
+    position: absolute;
+}
+
+#reportInfoContainer{
+    min-height: 80%;
+    width: 20%;
+    left: 2%;
+    top: 10%;
+    z-index: 3;
+    overflow-y: auto;
+    position: absolute;
+}
+
+section {
+    margin-top: 1em;
+    margin-bottom: 2.5em;
+    margin-right: 1em;
+    margin-left: 1em;
+  }
+
+ion-icon{
+    margin-left: .2em;
+}
+
+@media (max-width: 769px) { 
+    #addReportContainer{
+        max-height: 90%;
+        width: 90%;
+        left: 2%;
+        top: 7%;
+        z-index: 2;
+        overflow-y: auto;
+        position: absolute;
+    }
+
+    #reportInfoContainer{
+        min-height: 80%;
+        min-width: 90%;
+        left: 2%;
+        top: 7%;
+        z-index: 3;
+        overflow-y: auto;
+        position: absolute;
+    }
+}
