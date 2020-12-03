@@ -4,6 +4,7 @@ import * as mapboxgl from 'mapbox-gl';
 import { LngLatLike } from 'mapbox-gl';
 import { Category } from 'src/app/Models/category.model';
 import { GeoJson } from 'src/app/Models/mapJson.model';
+import { MarkerInMap } from 'src/app/Models/marker.model';
 import { MapService } from './service/map.service';
 
 @Component({
@@ -12,7 +13,7 @@ import { MapService } from './service/map.service';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
-  markers: any;
+  markers: MarkerInMap[];
   showAddReport: boolean;
   showReportInfo: boolean;
   disabledButton: boolean;
@@ -21,7 +22,7 @@ export class MapComponent implements OnInit {
   userCoordinates: number[];
   userCategory: Category;
   categories: Category[];
-  currentMarker: GeoJson;
+  currentMarker: MarkerInMap;
 
   mapbox = (mapboxgl as typeof mapboxgl);
   map: mapboxgl.Map;
@@ -38,32 +39,36 @@ export class MapComponent implements OnInit {
     this.disabledButton = true;
     this.actualAddress = "";
     this.categories = new Array<Category>();
-   }
+    this.markers = new Array<MarkerInMap>();
+  }
 
   ngOnInit() {
     setTimeout(() => this.buildMap(), 300);
-    setTimeout(() => this.uploadMarkersToMap(), 310);
+    setTimeout(() => this.uploadMarkersToMap(), 410);
+    setTimeout(() => this.map.resize(), 415);
     this.categories = this.mapService.categories;
   }
 
-  clearReport(){
-
+  clearReport() {
+    this.mapService.deleteMarkerinmap(this.currentMarker.id);
+    this.uploadMarkersToMap();
+    this.closeReport();
   }
 
-  closeReport(){
+  closeReport() {
     this.showAddReport = false;
     this.showReportInfo = false;
     this.userMarkerReport.remove();
     this.disabledButton = true;
   }
 
-  addCategory(categoryId: string){
+  addCategory(categoryId: string) {
     this.userCategory = this.mapService.getCategoryById(categoryId);
     this.disabledButton = false;
   }
 
-  addReport(){
-    this.mapService.addMarker(this.userCoordinates, this.userCategory);
+  addReport() {
+    this.mapService.insertMarkerinmap(this.userCoordinates, this.userCategory);
     this.uploadMarkersToMap();
     this.closeReport();
   }
@@ -79,7 +84,7 @@ export class MapComponent implements OnInit {
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.resize();
 
-    this.map.on('click', (e) =>{
+    this.map.on('click', (e) => {
       this.map.flyTo({
         zoom: 15,
         center: e.lngLat as LngLatLike
@@ -87,8 +92,8 @@ export class MapComponent implements OnInit {
 
       const longitudeClick = e.lngLat.lng;
       const latitudeClick = e.lngLat.lat;
-      
-      if(this.userMarkerReport != undefined){
+
+      if (this.userMarkerReport != undefined) {
         this.userMarkerReport.remove();
       }
 
@@ -96,7 +101,7 @@ export class MapComponent implements OnInit {
       markerIcon.name = "locate";
       markerIcon.style.fontSize = "40px";
       markerIcon.style.color = "black";
-      
+
       this.userMarkerReport = new mapboxgl.Marker(markerIcon)
         .setLngLat([longitudeClick, latitudeClick] as LngLatLike)
         .addTo(this.map);
@@ -107,24 +112,35 @@ export class MapComponent implements OnInit {
   }
 
   private uploadMarkersToMap(): void {
-    this.mapService.getMarkers().forEach((marker) => {
-        const markerIcon = this.createMarkerMapIcon(marker);
-        markerIcon.addEventListener('click', () => {
-          this.map.flyTo({
-            zoom: 12.5,
-            center: marker.geometry.coordinates as LngLatLike
-          });
-          this.currentMarker = marker;
-          this.showReportInfo = true;
+    this.mapService.getMarkerinmap()
+      .snapshotChanges()
+      .subscribe(item => {
+        item.forEach(element => {
+          let x = JSON.parse(JSON.stringify(element.payload));
+          x["id"] = element.key;
+          this.markers.push(x as MarkerInMap);
+          this.uploadMarkerToMap(x as MarkerInMap)
         });
-        new mapboxgl.Marker(markerIcon)
-          .setLngLat(marker.geometry.coordinates as LngLatLike)
-          .addTo(this.map);
+      });
+  }
 
-        markerIcon.addEventListener('mouseover', () => {
-          markerIcon.style.cursor = 'pointer';
-        });
+  private uploadMarkerToMap(marker: MarkerInMap) {
+    const markerIcon = this.createMarkerMapIcon(marker);
+    markerIcon.addEventListener('click', () => {
+      this.map.flyTo({
+        zoom: 12.5,
+        center: [marker.latitude, marker.longuitude] as LngLatLike
+      });
+      this.currentMarker = marker;
+      this.showReportInfo = true;
     });
+    new mapboxgl.Marker(markerIcon)
+        .setLngLat([marker.latitude, marker.longuitude] as LngLatLike)
+        .addTo(this.map);
+
+      markerIcon.addEventListener('mouseover', () => {
+        markerIcon.style.cursor = 'pointer';
+      });
   }
 
   async getAddressFromMapboxCoordinates(query: string) {
@@ -138,9 +154,9 @@ export class MapComponent implements OnInit {
 
   createMarkerMapIcon(marker): HTMLElement {
     let markerIcon = document.createElement('ion-icon');
-    markerIcon.name = marker.properties.iconName;
+    markerIcon.name = marker.category.iconName;
     markerIcon.style.fontSize = "20px";
-    markerIcon.style.color = marker.properties.color;
+    markerIcon.style.color = marker.category.color;
     markerIcon.style.stroke = "black";
     markerIcon.style.strokeWidth = "6";
     return markerIcon;

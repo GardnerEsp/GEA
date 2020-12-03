@@ -4,6 +4,6 @@ export interface MarkerInMap{
     id: string
     date: Date
     latitude: number
-    longitude: number
+    longuitude: number
     category: Category
 }
