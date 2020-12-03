@@ -2,11 +2,14 @@
     height: 100%;
     width: 100%;
     background-color: #313131;
+    position: relative;
+    top: 0;
+    bottom: 0;
 }
 
 #map-container {
     height: 100%;
-    width: 100%;
+    width: auto;
     background-color: #313131;
 }
 
@@ -73,5 +76,4 @@ ion-icon{
         overflow-y: auto;
         position: absolute;
     }
-}
 }
