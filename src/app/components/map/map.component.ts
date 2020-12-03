@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '@env/environment';
+import * as mapboxgl from 'mapbox-gl';
+import { LngLatLike } from 'mapbox-gl';
+import { MapService } from './services/map.service';
 
 
 import * as mapboxgl from 'mapbox-gl';
@@ -13,8 +17,6 @@ import { ServicesService } from 'src/app/Services/services.service';
   styleUrls: ['./map.component.scss'],
 })
 export class MapComponent implements OnInit {
- 
-  intervale: any;
   markers: any;
 
   mapbox = (mapboxgl as typeof mapboxgl);
@@ -24,21 +26,13 @@ export class MapComponent implements OnInit {
   lng = -2.4125;
   zoom = 15;
 
-
-
   constructor(
-    private mapService: ServicesService) { }
+    private mapService: MapService,
+  ) { }
 
-  ngOnInit() {}
-  
-
-
-  
-  ionViewDidEnter() {
-    this.buildMap();
-    this.intervale = setTimeout(() => {
-      this.uploadMarkersToMap();
-    }, 1000);
+  ngOnInit() {
+    setTimeout(() => this.buildMap(), 200);
+    setTimeout(() => this.uploadMarkersToMap(), 250);
   }
 
   buildMap() {
@@ -53,10 +47,8 @@ export class MapComponent implements OnInit {
     this.map.resize();
   }
 
-  
-
   private uploadMarkersToMap(): void {
-    this.mapService.getMarkers().forEach((marker, index) => {
+    this.mapService.getMarkers().forEach((marker) => {
         const markerIcon = this.createMarkerMapIcon(marker);
         markerIcon.addEventListener('click', () => {
           this.map.flyTo({
@@ -64,18 +56,30 @@ export class MapComponent implements OnInit {
             center: marker.geometry.coordinates as LngLatLike
           });
         });
-        
         new mapboxgl.Marker(markerIcon)
           .setLngLat( marker.geometry.coordinates as LngLatLike)
           .addTo(this.map);
+        this.getAddressFromMapboxCoordinates(marker.geometry.coordinates+"");
+        
     });
+  }
+
+  async getAddressFromMapboxCoordinates(query: string) {
+    const url = 'https://api.mapbox.com/geocoding/v5/mapbox.places/';
+    const response = await fetch(
+      url + query + '.json?types=address&access_token=' + environment.mapBoxToken
+    );
+    const data = await response.json();
+    return data.features[0].place_name.toString();
   }
 
   createMarkerMapIcon(marker): HTMLElement {
     let markerIcon = document.createElement('ion-icon');
-    markerIcon.name = "pin-sharp"
-    markerIcon.style.fontSize = "40px";
+    markerIcon.name = marker.properties.iconName;
+    markerIcon.style.fontSize = "4.5vh";
     markerIcon.style.color = marker.properties.color;
+    markerIcon.style.stroke = "black";
+    markerIcon.style.strokeWidth = "6";
     return markerIcon;
   }
 
