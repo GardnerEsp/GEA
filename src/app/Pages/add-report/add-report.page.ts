@@ -17,4 +17,7 @@ export class AddReportPage implements OnInit {
       this.router.navigateByUrl('/home');
     
   }
+  add(){
+    
+  }
 }

@@ -1,13 +1,53 @@
 <ion-header no-border [translucent]="true" class="animated fadeInDown">
 
     <ion-toolbar>
-        <ion-title>Agregar Reporte</ion-title>
+        <ion-title>Reportar</ion-title>
         <ion-buttons slot="start">
-            <ion-back-button (click)="cancelReport()"></ion-back-button>
+            <ion-back-button color="medium" mode=ios class="button-clear " (click)="cancelReport()"></ion-back-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+    <ion-item lines="none" class="marginSpace">
+        <ion-label>
+            <h1><b>Dirección</b> </h1>
+        </ion-label>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>
+            Dirección actual del pedo
+        </ion-label>
+    </ion-item>
+
+    <ion-list>
+        <ion-list-header>
+            <ion-label class="marginSpace">
+                <h1><b>Tipo</b> </h1>
+            </ion-label>
+        </ion-list-header>
+
+        <ion-item class="colorInterface2">
+            <ion-label>Desperfecto</ion-label>
+            <ion-select placeholder="Seleccionar">
+                <ion-select-option value="bache">Bache</ion-select-option>
+                <ion-select-option value="alcantarilla">Alcantarilla destapada</ion-select-option>
+                <ion-select-option value="luz">Luz Averiada</ion-select-option>
+            </ion-select>
+
+        </ion-item>
+
+
+
+    </ion-list>
+
+
+    <ion-fab color="danger" vertical="bottom" horizontal="center" slot="fixed">
+        <ion-fab-button class="colorInterface" (click)="add()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 
 </ion-content>

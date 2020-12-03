@@ -6,7 +6,6 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { ComponentsModule } from '../../components/components.module';
-import { MapComponent } from '../../components/map/map.component';
 
 
 
@@ -17,7 +16,6 @@ import { MapComponent } from '../../components/map/map.component';
     IonicModule,
     HomePageRoutingModule,
     ComponentsModule,
-    MapComponent,
   ],
   declarations: [HomePage]
 })
